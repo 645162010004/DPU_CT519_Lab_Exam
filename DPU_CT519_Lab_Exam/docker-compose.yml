@@ -1,0 +1,20 @@
+
+version: '3.3'
+services:
+  APP_B:
+    image: golang:1.16-alpine
+    container_name: APP_B
+    volumes:
+      - './APP_B:/app'
+    working_dir: /app
+    ports:
+      - 9904:80
+  php:
+    build:
+      context: .
+      dockerfile: ./APP_A/Dockerfile
+    ports:
+      - 8000:80
+    volumes:
+      - ./APP_A:/var/www/html/
+
